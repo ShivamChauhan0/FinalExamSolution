@@ -64,9 +64,19 @@ public class TestPMT {
 		double dEscrow = 0;
 
 		Loan loan = new Loan(dLoanAmount, dInterestRate, iNbrOfYears, localDate, dAdditionalPayment, dEscrow);
+		Loan loannopayments = new Loan(dLoanAmount, dInterestRate, iNbrOfYears, localDate, 0, dEscrow);
+		
+		assertEquals(loannopayments.getTotalInterest() - loan.getTotalInterest(), 236923.23, .01);
+		
+		assertEquals(loannopayments.getTotalPayments() - loan.getTotalPayments(), 236923.23, .01);
 
-		//TODO: Assert correct values based on amort spreadsheet (total payments, total payment amt, 
-		//		total interest, total interest saved, total payments saved.
+		assertEquals(loan.getTotalInterest(), 19342.64, .01);
+		
+		assertEquals(loan.getTotalPayments(), 69342.64, .01);
+		
+		assertEquals(loan.getLoanPayments().size(), 118);
+
+
 	}	
 }
 
