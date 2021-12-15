@@ -32,7 +32,7 @@ public class Loan {
 		double RemainingBalance = LoanAmount;
 		int PaymentCnt = 1;
 		
-		while (RemainingBalance >= this.GetPMT() + AdditionalPayment)) {
+		while (RemainingBalance >= this.GetPMT() + AdditionalPayment) {
 			Payment paymnt = new Payment(RemainingBalance, PaymentCnt++, startDate, this, false);
 			RemainingBalance = paymnt.getEndingBalance();
 			startDate = startDate.plusMonths(1);
@@ -45,7 +45,7 @@ public class Loan {
 
 	public double GetPMT() {
 		double PMT = 0;
-		PMT = Math.abs(FinanceLib.pmt(this.getInterestRate()/12, this.getLoanPaymentCnt(), this.getLoanAmount(), this.getLoanBalanceEnd(), this.bCompoundingOption()));
+		PMT = Math.abs(FinanceLib.pmt(this.getInterestRate()/12, this.getLoanPaymentCnt(), this.getLoanAmount(), this.getLoanBalanceEnd(), this.bCompoundingOption));
 		return Math.abs(PMT);
 	}
 

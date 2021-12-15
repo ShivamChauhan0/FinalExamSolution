@@ -230,7 +230,6 @@ public class LoanCalcViewController implements Initializable {
 		lblMonthlyPayment.setText("");
 		lblPaymentsSaved.setText("");
 		lblEscrow.setText("");
-		lblTotalPayments.setText("");
 		lblTotalInterest.setText("");
 
 	}
@@ -253,7 +252,7 @@ public class LoanCalcViewController implements Initializable {
 			goodtogo = false; 
 		}
 	
-		if(NbrOfYear.getText().trim().isEmpty() || !(Double.parseDouble(NbrOfYears.getText().trim()) > 0))
+		if(NbrOfYears.getText().trim().isEmpty() || !(Double.parseDouble(NbrOfYears.getText().trim()) > 0))
 		{
 			contentText.append("The number of years must be greater than 0. \n");
 			goodtogo = false;
