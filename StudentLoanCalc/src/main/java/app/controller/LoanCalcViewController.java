@@ -141,14 +141,11 @@ public class LoanCalcViewController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
-		//TODO: This is for you... so you don't have to type in values over and over.  
-		//	Uncomment the next three lines to set these default values
-		/*		
+				
 		LoanAmount.setText("75000");
 		InterestRate.setText("6.58");
 		NbrOfYears.setText("20");
-		*/
+	
 		cmbLoanType.getItems().addAll("Home", "Auto", "School");
 
 		cmbLoanType.getSelectionModel().selectFirst();
@@ -230,8 +227,11 @@ public class LoanCalcViewController implements Initializable {
 		stackedBarChart.getChildren().clear();
 		
 		lblInterestSaved.setText("");
-		
-		//TODO: The line above shows you how to clear lblInterestSaved.  Clear the rest of the calculated fields
+		lblMonthlyPayment.setText("");
+		lblPaymentsSaved.setText("");
+		lblEscrow.setText("");
+		lblTotalPayments.setText("");
+		lblTotalInterest.setText("");
 
 	}
 
@@ -243,20 +243,33 @@ public class LoanCalcViewController implements Initializable {
 		
 		
 		if (LoanAmount.getText().trim().isEmpty() || !(Double.parseDouble(LoanAmount.getText().trim()) > 0)) {
-			contentText.append("Loan Amount must be a positive double. \n");
+			contentText.append("Loan Amount must be a positive value. \n");
 			goodtogo = false;
 		}
 		
-		//TODO: The line above validates LoanAmount.  To fail validation, add to 'contentText' and set 'goodtoGo' to false
-		// 	add the following validaitons:
+		if(InterestRate.getText().trim().isEmpty() || !(Double.parseDouble(InterestRate.getText().trim()) > 0) && (Double.parseDouble(InterestRate.getText().trim()) <= 20)) 
+		{
+			contentText.append("Interest rate must be positive and between 0 and 20. \n");
+			goodtogo = false; 
+		}
+	
+		if(NbrOfYear.getText().trim().isEmpty() || !(Double.parseDouble(NbrOfYears.getText().trim()) > 0))
+		{
+			contentText.append("The number of years must be greater than 0. \n");
+			goodtogo = false;
+		}
 		
-		//TODO: Validate InterestRate is between 0 and 20.  Make sure there's no alpha characters.
-
-		//TODO: Validate NbrOfYears is > 0
+		if(EscrowAmount.getText().trim().isEmpty() || !(Double.parseDouble(EscrowAmount.getText().trim()) >= 0))
+		{
+			contentText.append("Escrow amount must be greater to or equal to 0. \n");
+			goodtogo = false;
+		}
 		
-		//TODO: Validate EscrowAmount >= 0
-		
-		//TODO: Validate AdditionalPayemnt >= 0
+		if(AdditionalPayment.getText().trim().isEmpty() || !(Double.parseDouble(AdditionalPayment.getText().trim()) >= 0))
+		{
+			contentText.append("Additional payment amount must be greater to or equal to 0. \n");
+			goodtogo = false;
+		}
 		
 		if (!goodtogo) {
 			Alert fail = new Alert(AlertType.ERROR);
